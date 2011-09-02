@@ -8,8 +8,8 @@ Installing on OS X
 
     cd ~
     git clone git@github.com:hserang/vim-setup.git
-    ln -s vim-settings/.vimrc .
-    ln -s vim-settings/.vim .
-    cd vim-settings
+    ln -s vim-setup/.vimrc .
+    ln -s vim-setup/.vim .
+    cd vim-setup
     git submodule init
     git submodule update
