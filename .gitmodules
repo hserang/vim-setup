@@ -22,3 +22,6 @@
 [submodule ".vim/bundle/The-NERD-tree"]
 	path = .vim/bundle/The-NERD-tree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule ".vim/bundle/vim-easymotion"]
+	path = .vim/bundle/vim-easymotion
+	url = https://github.com/vim-scripts/EasyMotion.git
