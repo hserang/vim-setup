@@ -7,7 +7,7 @@ Installing on OS X
 ------------------
 
     cd ~
-    git clone git@github.com:edmundsalvacion/vim-settings.git
+    git clone git@github.com:hserang/vim-setup.git
     ln -s vim-settings/.vimrc .
     ln -s vim-settings/.vim .
     cd vim-settings
