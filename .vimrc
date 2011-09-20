@@ -94,3 +94,15 @@ autocmd WinEnter * call NERDTreeQuit()
 
 " Smarty
 au BufRead,BufNewFile *.tpl set filetype=smarty
+
+" Toggle Mouse select and copy
+nnoremap <F12> :call ToggleMouse()<CR>
+function! ToggleMouse()
+    if &mouse == 'a'
+        set mouse-=a
+        echo "Mouse select will copy"
+    else
+        set mouse=a
+        echo "Mouse sets visual mode"
+    endif
+endfunction
