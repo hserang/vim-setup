@@ -14,7 +14,7 @@ set smarttab
 set expandtab
 
 " show invisibles
-set listchars=tab:>\ ,eol:¶
+set listchars=tab:>\,trail:.,eol:¶
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 set list
