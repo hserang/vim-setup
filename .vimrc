@@ -1,116 +1,38 @@
-" general must haves
-filetype off
-call pathogen#runtime_append_all_bundles()
-filetype plugin indent on
-runtime! macros/matchit.vim
-set nocompatible
-set modelines=0
+""
+"" Janus setup
+""
 
-" tab me
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set smarttab
-set expandtab
+" Define paths
+let g:janus_path = escape(fnamemodify(resolve(expand("<sfile>:p")), ":h"), ' ')
+let g:janus_vim_path = escape(fnamemodify(resolve(expand("<sfile>:p" . "vim")), ":h"), ' ')
+let g:janus_custom_path = expand("~/.janus")
 
-" show invisibles
-set listchars=tab:>\ ,trail:.,eol:¶
-highlight NonText guifg=#4a4a59
-highlight SpecialKey guifg=#4a4a59
-set list
-nmap <leader>hi :set list!<CR>
+" Source janus's core
+exe 'source ' . g:janus_vim_path . '/core/before/plugin/janus.vim'
 
-"set autoindent
+" You should note that groups will be processed by Pathogen in reverse
+" order they were added.
+call janus#add_group("tools")
+call janus#add_group("langs")
+call janus#add_group("colors")
 
-" make awesomer
-set encoding=utf-8
-set scrolloff=3
-set showmode
-set showcmd
-set hidden
-set wildmenu
-set wildmode=list:longest
-set visualbell
-set cursorline
-set ttyfast
-set ruler
-set backspace=indent,eol,start
-set laststatus=2
-set relativenumber
-set mouse=a
-cmap W w
-nnoremap <F5> :GundoToggle<CR>
+""
+"" Customisations
+""
 
-" tame searching
-set gdefault
-set incsearch
-set showmatch
-set hlsearch
-nnoremap <leader><space> :noh<cr>
-nnoremap <leader>a :Ack<space>
-nnoremap <tab> %
-vnoremap <tab> %
-nmap <silent> <Leader>cd :cd %:p:h<CR>
-
-" handle columns
-set wrap
-set textwidth=79
-set formatoptions=qrn1
-
-" movement
-set whichwrap=b,s,<,>,[,]
-
-" colors and themes
-syntax on
-colorscheme ir_black
-set t_Co=256
-hi Pmenu ctermbg=238 gui=bold
-
-" gui specific items
-if has("gui_running")
-    set colorcolumn=100
-    set guioptions=egmrt
-    set guifont=Monaco:h13
-    colorscheme mustang
+if filereadable(expand("~/.vimrc.before"))
+  source ~/.vimrc.before
 endif
-" nerd tree
-map <F2> :NERDTreeToggle<CR>
 
-function! NERDTreeQuit()
-  redir => buffersoutput
-  silent buffers
-  redir END
-"                     1BufNo  2Mods.     3File           4LineNo
-  let pattern = '^\s*\(\d\+\)\(.....\) "\(.*\)"\s\+line \(\d\+\)$'
-  let windowfound = 0
 
-  for bline in split(buffersoutput, "\n")
-    let m = matchlist(bline, pattern)
+" Disable plugins prior to loading pathogen
+exe 'source ' . g:janus_vim_path . '/core/plugins.vim'
 
-    if (len(m) > 0)
-      if (m[2] =~ '..a..')
-        let windowfound = 1
-      endif
-    endif
-  endfor
+""
+"" Pathogen setup
+""
 
-  if (!windowfound)
-    quitall
-  endif
-endfunction
-autocmd WinEnter * call NERDTreeQuit()
+" Load all groups, custom dir, and janus core
+call janus#load_pathogen()
 
-" Smarty
-au BufRead,BufNewFile *.tpl set filetype=smarty
-
-" Toggle Mouse select and copy
-nnoremap <F12> :call ToggleMouse()<CR>
-function! ToggleMouse()
-    if &mouse == 'a'
-        set mouse-=a
-        echo "Mouse select will copy"
-    else
-        set mouse=a
-        echo "Mouse sets visual mode"
-    endif
-endfunction
+" .vimrc.after is loaded after the plugins have loaded

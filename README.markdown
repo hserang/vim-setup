@@ -1,12 +1,21 @@
-Haroun Serang's Vim settings - copied from Edmund Salvacion and personalized
+Haroun Serang's Vim Environment
 =======================
-I need a place to sync and share my vim settings. github is as good a place as any.
+
+I've become a fan of this project, with thanks to @banananeil for
+ bringing it to my attention:
+https://github.com/carlhuda/janus
+
+Follow directions there, and continue with tmux install and
+configuration
+
+These are the config files to complete the environment. It is assumed
+you have already installed janus and updated your .bash_profile and
+.tmux.conf
+
+Install tmux:
+brew install tmux
+
+Update copy/paste dependency:
+brew install reattach-to-user-namespace
 
 
-Installing on OS X
-------------------
-
-    cd ~
-    git clone git@github.com:hserang/vim-setup.git
-    cd vim-setup
-    sh initial-setup.sh
